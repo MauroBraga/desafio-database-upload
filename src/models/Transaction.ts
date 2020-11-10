@@ -1,3 +1,5 @@
+import Category from "./Category";
+
 class Transaction {
   id: string;
 
@@ -8,6 +10,8 @@ class Transaction {
   value: number;
 
   category_id: string;
+
+  category: Category;
 
   created_at: Date;
 
