@@ -16,7 +16,7 @@ categoriesRouter.post('/', async (request, response) => {
 });
 
 categoriesRouter.delete('/:id', async (request, response) => {
-  // TODO
+
 });
 
 categoriesRouter.post('/import', async (request, response) => {
