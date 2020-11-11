@@ -25,14 +25,20 @@ class CreateTransactionService {
     if (type === 'outcome' && total < value) {
       throw new AppError(' You do not have enough balance');
     }
-    let checkCategoriaExists = await categoryRepository.findOne({where: { title:category },})
 
-    if(!checkCategoriaExists){
-      checkCategoriaExists = categoryRepository.create({title})
-      await categoryRepository.save(checkCategoriaExists);
+    let transactionCategory = await categoryRepository.findOne({where: { title:category, },})
+
+    if(!transactionCategory){
+      transactionCategory = categoryRepository.create({title:category})
+      await categoryRepository.save(transactionCategory);
 
     }
-    const transaction = await repository.create({title,value,type,category: checkCategoriaExists,  category_id: checkCategoriaExists.id})
+    const transaction = await repository.create({
+      title,
+      value,
+      type,
+      category: transactionCategory
+    })
 
 
     await repository.save(transaction)
